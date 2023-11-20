@@ -1,0 +1,129 @@
+class Recipe:
+    def __init__(self, name, ingredients, instructions, prep_time):
+        self.name = name
+        self.ingredients = ingredients
+        self.instructions = instructions
+        self.prep_time = prep_time
+
+    def display_recipe(self):
+        print(f"\nRecipe: {self.name}")
+        print(f"Preparation Time: {self.prep_time} minutes")
+        print("\nIngredients:")
+        for ingredient in self.ingredients:
+            print(f"- {ingredient}")
+        print("\nInstructions:")
+        for step, instruction in enumerate(self.instructions, start=1):
+            print(f"{step}. {instruction}")
+
+class RecipeBook:
+    def __init__(self):
+        self.recipes = []
+
+    def add_recipe(self, recipe):
+        self.recipes.append(recipe)
+
+    def display_recipes(self):
+        print("\nAvailable Recipes:")
+        for i, recipe in enumerate(self.recipes, start=1):
+            print(f"{i}. {recipe.name}")
+
+def get_user_info():
+    user_name = input("Enter your name: ")
+    print(f"\nHello, {user_name}! Welcome to the Recipe Book!")
+
+    return user_name
+
+def main():
+    # Requesting user information
+    user_name = get_user_info()
+
+    # Creating recipe objects
+    recipes = [
+        Recipe("Matooke (Banana Stew)", ["Green bananas (matooke)", "Onions", "Tomatoes", "Garlic", "Oil", "Salt", "Pepper", "Spices"],
+                ["Peel and chop green bananas.", "Sauté onions, garlic, and tomatoes in oil.",
+                 "Add the chopped bananas and water. Cook until soft.", "Season with spices and serve with a sauce or stew."], 45),
+        Recipe("Ugali (Maize Porridge)", ["Maize flour", "Water"],
+                ["Boil water in a pan.", "Gradually add maize flour while stirring continuously to avoid lumps.", "Cook until it thickens. Serve with stews or sauces."], 20),
+        Recipe("Rolex (Ugandan Wrap)", ["Eggs", "Onions", "Tomatoes", "Green peppers", "Chapati (flatbread)"],
+                ["Scramble eggs with chopped onions, tomatoes, and green peppers.", "Spread the egg mix onto a chapati and roll it up."], 30),
+        Recipe("Luwoo (Peanut Stew)", ["Chicken, beef, or vegetables", "Peanut butter", "Onions", "Tomatoes", "Garlic", "Oil", "Salt", "Pepper", "Spices"],
+                ["Sauté onions, garlic, and tomatoes in oil.", "Add meat/veggies, water, and simmer.",
+                 "Add peanut butter, stirring until it thickens. Serve with rice or ugali."], 50),
+        Recipe("Matoke (Plantain Stew)", ["Ripe plantains", "Onions", "Tomatoes", "Garlic", "Oil", "Salt", "Pepper", "Spices"],
+                ["Peel and chop ripe plantains.", "Sauté onions, garlic, and tomatoes in oil.", "Add the plantains and water. Cook until soft."], 40),
+        Recipe("Groundnut Sauce (Peanut Sauce)", ["Groundnuts (peanuts)", "Onions", "Tomatoes", "Garlic", "Oil", "Salt", "Pepper", "Spices"],
+                ["Grind peanuts to make a paste.", "Sauté onions, garlic, and tomatoes in oil.", "Add the peanut paste and water. Cook until it thickens."], 35),
+        Recipe("Chapati (Flatbread)", ["Flour", "Water", "Salt", "Oil"],
+                ["Knead flour, salt, and water into a soft dough.", "Divide into balls, roll them flat, and cook on a hot skillet with oil."], 25),
+        Recipe("Nyama Choma (Grilled Meat)", ["Beef, goat, or chicken", "Salt", "Pepper", "Spices"],
+                ["Marinate meat with spices.", "Grill until cooked to your preference."], 40),
+        Recipe("Posho (Maize Porridge)", ["Maize flour", "Water"],
+                ["Boil water in a pan.", "Gradually add maize flour while stirring continuously until it thickens."], 20),
+        Recipe("Kabalagala (Plantain Pancakes)", ["Ripe plantains", "Flour", "Sugar", "Baking powder", "Water", "Oil"],
+                ["Mash plantains and mix with flour, sugar, baking powder, and water.", "Fry spoonfuls of batter in hot oil until golden brown."], 30),
+        Recipe("Asida", ["2 cups sorghum flour", "Water"], ["In a pot, bring water to a boil.",
+                "Gradually add sorghum flour while stirring continuously to avoid lumps.",
+                "Cook and stir until the mixture thickens into a stiff dough-like consistency.",
+                "Remove from heat, shape into a ball, and serve with stews or soups."], 30),
+        Recipe("Bamia (Okra Stew)", ["500g okra, chopped", "1 onion, diced", "2 tomatoes, chopped", "500g lamb or beef, cubed", "2 tablespoons peanut butter", "Salt, to taste", "Oil"],
+                ["In a pot, heat oil and sauté onions until translucent.",
+                "Add meat, cook until browned, then add tomatoes and cook until soft.",
+                "Stir in chopped okra and peanut butter, add salt, and simmer until okra is tender and the stew thickens."], 45),
+        Recipe("Kisra (Sudanese Flatbread)", ["2 cups sorghum flour", "Water", "Salt, to taste"],
+                ["In a bowl, mix sorghum flour, salt, and enough water to make a thin batter.",
+                "Heat a non-stick pan over medium heat, pour a ladle of batter, and swirl to cover the base.",
+                "Cook until the edges start to lift and the bottom is golden. Flip and cook the other side.",
+                "Repeat with the remaining batter."], 30),
+        Recipe("Shaiyah (Sudanese Tea)", ["4 cups water", "4 teaspoons loose black tea leaves", "Milk", "Sugar, to taste"],
+                ["Bring water to a boil in a pot.", "Add tea leaves and simmer for a few minutes.",
+                "Add milk and sugar, simmer for another 2-3 minutes.", "Strain the tea and serve hot."], 15),
+        Recipe("Dama (Sudanese Peanut Cookies)", ["2 cups roasted peanuts, ground", "1 cup sugar", "1 egg", "1 teaspoon vanilla extract"],
+                ["Preheat oven to 350°F (175°C).",
+                "Mix ground peanuts, sugar, egg, and vanilla extract in a bowl until a dough forms.",
+                "Roll the dough into small balls, place on a baking sheet, and flatten slightly.",
+                "Bake for 12-15 minutes or until golden brown. Let cool before serving."], 25),
+        Recipe("Boranga (Sudanese Sweet Millet Porridge)", ["1 cup millet flour", "Water", "Sugar, to taste", "Milk (optional)"],
+                ["In a pot, mix millet flour with water to make a smooth paste.",
+                "Add more water and cook over low heat, stirring continuously until thickened.",
+                "Sweeten with sugar and serve warm. Add milk if desired."], 20),
+        Recipe("Mulah (Sudanese Peanut Sauce)", ["1 cup peanuts, ground", "2 cups water", "1 onion, finely chopped", "2 tomatoes, chopped", "Salt and pepper, to taste"],
+                ["In a saucepan, mix ground peanuts with water and bring to a simmer.",
+                "Add onions, tomatoes, salt, and pepper. Cook until the sauce thickens and vegetables are tender."], 30),
+        Recipe("Kawal (Sudanese Eggplant Dip)", ["2 eggplants", "2 tomatoes, chopped", "2 cloves garlic, minced", "1 onion, finely chopped", "Salt and pepper, to taste", "Oil"],
+                ["Roast eggplants over an open flame or in the oven until skin is charred and flesh is soft.",
+                "Peel the eggplants, mash the flesh, and set aside.",
+                "In a pan, sauté onions and garlic in oil until soft. Add tomatoes and cook until they break down.",
+                "Add mashed eggplant, salt, and pepper. Cook until flavors meld."], 40),
+        Recipe("Shorba (Sudanese Vegetable Soup)", ["2 tablespoons oil", "1 onion, chopped", "2 carrots, diced", "2 potatoes, diced", "1 zucchini, diced", "1-liter vegetable or chicken broth", "Salt and pepper, to taste"],
+                ["Heat oil in a pot, sauté onions until translucent.",
+                "Add carrots, potatoes, zucchini, and broth. Bring to a boil.",
+                "Simmer until vegetables are tender. Season with salt and pepper."], 35),
+        Recipe("Fool Medames (Sudanese Fava Beans)", ["2 cups cooked fava beans", "2 tomatoes, chopped", "2 cloves garlic, minced", "1 onion, finely chopped", "Juice of 1 lemon", "Salt and pepper, to taste", "Olive oil"],
+                ["In a pan, heat olive oil and sauté onions and garlic until soft.",
+                "Add chopped tomatoes and cooked fava beans. Cook until heated through.",
+                "Season with lemon juice, salt, and pepper. Serve warm."], 25),
+        # ... (similarly, add more recipes if needed)
+    ]
+
+    # Creating recipe book and adding recipes
+    recipe_book = RecipeBook()
+    for recipe in recipes:
+        recipe_book.add_recipe(recipe)
+
+    # Displaying available recipes
+    recipe_book.display_recipes()
+
+    # User selects two recipes
+    choices = input("\nEnter the numbers of the two recipes you want to view (comma-separated): ")
+    choice_list = [int(choice) for choice in choices.split(",")]
+
+    if all(1 <= choice <= len(recipe_book.recipes) for choice in choice_list):
+        print("\nGreat! Here are the recipes you chose:")
+        for choice in choice_list:
+            selected_recipe = recipe_book.recipes[choice - 1]
+            selected_recipe.display_recipe()
+    else:
+        print("Invalid recipe choice. Please enter valid numbers.")
+
+if __name__ == "__main__":
+    main()
